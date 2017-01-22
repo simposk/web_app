@@ -1,9 +1,55 @@
-
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
-// Variables
-@import "variables";
-
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+$link: #337AB7;
+$grey: #4d4d4d;
+
+input[type="text"] {
+    padding: 25px 15px;
+    font-size: 17px;
+}
+
+body {
+    color: $grey;
+}
+
+.navbar {
+    margin-bottom: 70px;
+    .navbar-brand {
+        a {
+            color: $grey;
+        }
+    }
+}
+
+.posts-index {
+    a {
+        color: $grey;
+       &:hover {
+            color: lighten($grey, 15%);
+        }
+    }
+}
+
+.posts-show {
+    p {
+        font-size: 20px;
+        line-height: 25px;
+    }
+}
+
+.links {
+    text-align: center;
+
+    .delete {
+    color: red;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: $link;
+    &:hover {
+        color: darken($link, 15%);
+        text-decoration: underline;
+    }
+}
+}
