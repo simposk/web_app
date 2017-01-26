@@ -4,10 +4,6 @@
 $link: #337AB7;
 $grey: #4d4d4d;
 
-input[type="text"] {
-    padding: 25px 15px;
-    font-size: 17px;
-}
 
 body {
     color: $grey;
@@ -42,14 +38,14 @@ body {
     text-align: center;
 
     .delete {
-    color: red;
-    background: transparent;
-    border: none;
-    padding: 0;
-    color: $link;
-    &:hover {
-        color: darken($link, 15%);
-        text-decoration: underline;
+        color: red;
+        background: transparent;
+        border: none;
+        padding: 0;
+        color: $link;
+        &:hover {
+            color: darken($link, 15%);
+            text-decoration: underline;
+        }
     }
-}
 }

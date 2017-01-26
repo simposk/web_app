@@ -11,10 +11,17 @@
             <div class="navbar-brand">
                 <a href="/">Plannr</a>
             </div>
+
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                <li><a href="{{ route('posts.create') }}">New post</a></li>
-                <li><a href="#">Log Out</a></li>
+                @if (Auth::check()) 
+                    <li><a href="{{ route('posts.index') }}">Posts</a></li>
+                    <li><a href="{{ route('posts.create') }}">New post</a></li>
+                    <li><a href="#">Logout</a></li>
+                @else
+                    <li><a href="{{ route('posts.index') }}">Posts</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+                @endif
             </ul>
         </div>
     </nav>

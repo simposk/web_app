@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Session;
+use Auth;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         $posts = Post::all();
@@ -27,7 +33,10 @@ class PostsController extends Controller
         ]);
 
         $post = new Post($request->all());
-        
+
+        // Get current user_id
+        $post->user_id = Auth::id();
+
         $post->save();
 
         Session::flash('success', 'Your post was successfully created!');
@@ -45,6 +54,11 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+
+        if (!$post->ownedBy(Auth::user())) {
+            Session::flash('danger', 'You don\'t have permission to do that!');
+            return redirect()->route('posts.show', [$post->id]);
+        }
         
         return view('posts.edit', compact('post'));
     }
@@ -58,6 +72,10 @@ class PostsController extends Controller
 
         $post = Post::find($id);
 
+        if ($post->ownedBy(Auth::user())) {
+            return $this->unautohrized($request); 
+        }
+
         $post->title = $request->title;
 
         $post->body = $request->body;
@@ -69,10 +87,26 @@ class PostsController extends Controller
         return redirect()->route('posts.show', [$post->id]);
     }
 
+    public function unautohrized(Request $request)
+    {
+        if ($request->ajax()) {
+            return respone(['message' => 'No way.'], 403);
+        }   
+
+        Session::flash('danger', 'You don\'t have permission to do that!');
+        // return redirect()->route('posts.show', [$post->id]);
+        return redirect()->route('posts.index');
+    }
+
     public function destroy($id)
     {
         $post = Post::find($id);
 
+        if (!$post->ownedBy(Auth::user())) {
+            Session::flash('danger', 'You don\'t have permission to do that!');
+            return redirect()->route('posts.show', [$post->id]);
+        }
+        
         $post->delete();
 
         Session::flash('success', 'Your post was successfully deleted.');

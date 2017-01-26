@@ -9,11 +9,16 @@
 
 <hr>
 
-<div class="links">
-    {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-        <small><a href="{{ route('posts.index') }}">Back</a></small>
-        <small><a href="{{ route('posts.edit', $post->id) }}">Edit</a></small>
-        <small><button type="submit" class="delete">Delete</button></small>
-    {!! Form::close() !!}
-</div>
+@if ($post->ownedBy(Auth::user()))
+    <div class="links">
+        {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
+            <small><a href="{{ route('posts.index') }}">Back</a></small>
+            <small><a href="{{ route('posts.edit', $post->id) }}">Edit</a></small>
+            <small><button type="submit" class="delete">Delete</button></small>
+        {!! Form::close() !!}
+    </div>
+@else
+    <small><a href="{{ route('posts.index') }}">Back</a></small>
+@endif
+
 @stop
