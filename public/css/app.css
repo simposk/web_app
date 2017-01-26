@@ -7695,6 +7695,22 @@ body {
   margin-bottom: 70px;
 }
 
+.navbar .links li {
+  display: inline-block;
+  padding: 14px;
+}
+
+.navbar .links li a {
+  color: #4d4d4d;
+}
+
+.navbar .links li button {
+  background: transparent;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
 .navbar .navbar-brand a {
   color: #4d4d4d;
 }

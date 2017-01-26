@@ -11,6 +11,19 @@ body {
 
 .navbar {
     margin-bottom: 70px;
+    .links li{
+        display: inline-block;
+        padding: 14px;
+        a { 
+            color: $grey;
+        }
+        button {
+            background: transparent;
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+    }
     .navbar-brand {
         a {
             color: $grey;
