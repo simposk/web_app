@@ -22,6 +22,10 @@ class PostsController extends Controller
 
     public function create()
     {
+        if (!Auth::check()) {
+            Session::flash('danger', 'Please log in!');
+            return redirect()->route('login');
+        }
         return view('posts.create');
     }
 
@@ -47,8 +51,8 @@ class PostsController extends Controller
     public function show($post)
     {
         $post = Post::find($post);
-
-        return view('posts.show', compact('post'));
+        $user = Auth::user();        
+        return view('posts.show', compact('post', 'user'));
     }
 
     public function edit($id)

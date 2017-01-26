@@ -9,7 +9,7 @@
 
 <hr>
 
-@if ($post->ownedBy(Auth::user()))
+@if ($post->ownedBy($user))
     <div class="links">
         {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
             <small><a href="{{ route('posts.index') }}">Back</a></small>
