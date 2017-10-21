@@ -76,7 +76,7 @@ class PostsController extends Controller
 
         $post = Post::find($id);
 
-        if ($post->ownedBy(Auth::user())) {
+        if (! $post->ownedBy(Auth::user())) {
             return $this->unautohrized($request); 
         }
 
